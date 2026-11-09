@@ -1,6 +1,6 @@
 # Day / Night Toggle
 
-An animated day/night switch in a single HTML file. No libraries, no build step.
+An animated day/night switch in plain HTML, CSS and a little JavaScript. No libraries, no build step.
 
 **[Live demo →](https://interactive-day-night-toggle.vercel.app)**
 
@@ -15,10 +15,16 @@ Click it: the sun slides across and the moon covers it like an eclipse, clouds s
 
 ## Use it
 
-1. Download `index.html`.
-2. Open it in any modern browser.
+1. Download or clone the repo.
+2. Open `index.html` in any modern browser.
 
-To put it in your own page, copy the `<style>`, the `<button class="toggle">…</button>` block and the `<script>`.
+| File | What's in it |
+|---|---|
+| `index.html` | The structure: the button, its layers and the SVG drawings of clouds and stars |
+| `style.css` | The look and all the motion: colors, springs, transitions, keyframes |
+| `script.js` | About 40 lines: flips day/night on click, the knob's squash-and-stretch, the GitHub star count |
+
+To put it in your own page, copy the `<button class="toggle">…</button>` block, then link `style.css` and `script.js`. The page footer (credits) and the star-count code are optional.
 
 ## Change the size
 
@@ -33,7 +39,7 @@ Everything inside the toggle scales from one value:
 
 ## Change the colors
 
-All colors live as variables at the top of the `<style>` block (`:root`): sky, sun, moon, craters, the three cloud layers and the stars.
+All colors live as variables at the top of `style.css` (`:root`): sky, sun, moon, craters, the three cloud layers and the stars.
 
 ## Read the state
 
