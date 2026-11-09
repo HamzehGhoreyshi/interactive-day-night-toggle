@@ -41,13 +41,64 @@
   html, body { height: 100%; margin: 0; }
 
   body {
-    position: relative;
-    display: grid;
-    place-items: center;
-    padding: 16px;
     background: var(--page-day);
     background-color: #ededed;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Full-screen stage pinned to the viewport: the toggle is always in the exact center,
+     whatever the browser or page height. */
+  .stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  /* ---------- Footer ---------- */
+  .credits {
+    --text: #8c8c92;
+    --strong: #1d1d1f;
+    position: fixed;
+    left: 0; right: 0;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 12px;
+    padding: 0 16px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--text);
+    transition: color 900ms var(--ease-out);
+  }
+  .is-night .credits { --text: #7d808b; --strong: #eceef3; }
+  .credits a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: opacity 200ms;
+  }
+  .credits a:hover { opacity: .7; }
+  .credits a:focus-visible { outline: 2px solid #4c8af5; outline-offset: 3px; }
+  .credits strong { color: var(--strong); font-weight: 600; transition: color 900ms var(--ease-out); }
+  .credits svg { width: 18px; height: 18px; fill: var(--strong); transition: fill 900ms var(--ease-out); }
+  .credits .star-icon { fill: #e3a22f; }
+  .credits .dot { opacity: .6; }
+  .credits [hidden] { display: none; }
+  @media (max-width: 420px) {
+    .credits { font-size: 13px; gap: 6px 16px; }
+    .credits .dot { display: none; }
+    .credits svg { width: 16px; height: 16px; }
   }
   /* Gradients can't transition, so the night page fades in as an overlay */
   body::before {
@@ -293,6 +344,7 @@
 </head>
 <body class="is-night preload">
 
+<main class="stage">
 <button class="toggle" type="button" role="switch" aria-checked="true" aria-label="Night mode">
   <span class="pill">
     <span class="layer sky-night"></span>
@@ -365,11 +417,37 @@
 
   <span class="sr-only">Toggle day and night</span>
 </button>
+</main>
+
+<footer class="credits">
+  <a href="https://hamzeh.framer.ai" target="_blank" rel="noopener">© 2026 <strong>Hamzeh</strong></a>
+  <span class="dot" aria-hidden="true">·</span>
+  <span>Powered by <strong>Claude</strong></span>
+  <span class="dot" aria-hidden="true">·</span>
+  <a href="https://github.com/Hamzeh75/interactive-day-night-toggle" target="_blank" rel="noopener" aria-label="Source code on GitHub, by Hamzeh75">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    <strong>Hamzeh75</strong>
+  </a>
+  <span class="dot stars-item" aria-hidden="true" hidden>·</span>
+  <a class="stars-item" href="https://github.com/Hamzeh75/interactive-day-night-toggle/stargazers" target="_blank" rel="noopener" hidden>
+    <svg class="star-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.751.751 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+    <strong class="star-count"></strong><span class="sr-only"> stars on GitHub</span>
+  </a>
+</footer>
 
 <script>
   const body = document.body;
   const toggle = document.querySelector('.toggle');
   const knob = document.querySelector('.knob');
+
+  // Live GitHub star count. If the request fails (offline, rate limit), the star item stays hidden.
+  fetch('https://api.github.com/repos/Hamzeh75/interactive-day-night-toggle')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(repo => {
+      document.querySelector('.star-count').textContent = repo.stargazers_count;
+      document.querySelectorAll('.stars-item').forEach(el => el.hidden = false);
+    })
+    .catch(() => {});
 
   // Skip transitions on first paint, enable them after
   requestAnimationFrame(() => requestAnimationFrame(() => body.classList.remove('preload')));
