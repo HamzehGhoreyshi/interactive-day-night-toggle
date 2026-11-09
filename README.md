@@ -6,8 +6,10 @@ An animated day/night switch in a single HTML file. No libraries, no build step.
 
 ![Day / night toggle animation](assets/demo.gif)
 
-![Day](assets/day.png)
-![Night](assets/night.png)
+<p align="center">
+  <img src="assets/day.png" alt="Day state" width="49%">
+  <img src="assets/night.png" alt="Night state" width="49%">
+</p>
 
 Click it: the sun slides across and the moon covers it like an eclipse, clouds sink away, stars drop in and twinkle, and a shooting star crosses the night sky. Click again to bring the day back.
 

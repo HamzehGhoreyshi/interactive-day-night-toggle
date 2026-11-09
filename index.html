@@ -61,8 +61,8 @@
 
   /* ---------- Footer ---------- */
   .credits {
-    --text: #8c8c92;
-    --strong: #1d1d1f;
+    --text: #9a9aa0;
+    --strong: #55555c;
     position: fixed;
     left: 0; right: 0;
     bottom: max(20px, env(safe-area-inset-bottom));
@@ -71,18 +71,19 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 6px 12px;
+    gap: 4px 10px;
     padding: 0 16px;
-    font-size: 15px;
+    font-size: 12px;
+    letter-spacing: .01em;
     line-height: 1.4;
     color: var(--text);
     transition: color 900ms var(--ease-out);
   }
-  .is-night .credits { --text: #7d808b; --strong: #eceef3; }
+  .is-night .credits { --text: #6b6e78; --strong: #a9acb6; }
   .credits a {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     color: inherit;
     text-decoration: none;
     border-radius: 6px;
@@ -90,15 +91,15 @@
   }
   .credits a:hover { opacity: .7; }
   .credits a:focus-visible { outline: 2px solid #4c8af5; outline-offset: 3px; }
-  .credits strong { color: var(--strong); font-weight: 600; transition: color 900ms var(--ease-out); }
-  .credits svg { width: 18px; height: 18px; fill: var(--strong); transition: fill 900ms var(--ease-out); }
-  .credits .star-icon { fill: #e3a22f; }
-  .credits .dot { opacity: .6; }
+  .credits strong { color: var(--strong); font-weight: 500; transition: color 900ms var(--ease-out); }
+  .credits svg { width: 13px; height: 13px; fill: var(--strong); transition: fill 900ms var(--ease-out); }
+  .credits .star-icon { fill: #d9a03a; }
+  .credits .dot { opacity: .5; }
   .credits [hidden] { display: none; }
   @media (max-width: 420px) {
-    .credits { font-size: 13px; gap: 6px 16px; }
+    .credits { font-size: 11px; gap: 4px 14px; }
     .credits .dot { display: none; }
-    .credits svg { width: 16px; height: 16px; }
+    .credits svg { width: 12px; height: 12px; }
   }
   /* Gradients can't transition, so the night page fades in as an overlay */
   body::before {
