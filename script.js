@@ -20,6 +20,10 @@ toggle.addEventListener('click', () => {
   body.classList.toggle('is-day', !night);
   toggle.setAttribute('aria-checked', String(night));
   toggle.setAttribute('aria-label', night ? 'Night mode' : 'Day mode');
+  // The browser-tab icon follows the toggle: sun by day, moon by night
+  const icon = night ? 'moon' : 'sun';
+  document.querySelector('[data-icon="svg"]').href = `icons/${icon}.svg`;
+  document.querySelector('[data-icon="png"]').href = `icons/${icon}-32.png`;
 
   // Squash-and-stretch on the knob while it travels (separate from the slide transform)
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
