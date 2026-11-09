@@ -3,7 +3,7 @@ const toggle = document.querySelector('.toggle');
 const knob = document.querySelector('.knob');
 
 // Live GitHub star count. If the request fails (offline, rate limit), the star item stays hidden.
-fetch('https://api.github.com/repos/Hamzeh75/interactive-day-night-toggle')
+fetch('https://api.github.com/repos/HamzehGhoreyshi/interactive-day-night-toggle')
   .then(r => r.ok ? r.json() : Promise.reject())
   .then(repo => {
     document.querySelector('.star-count').textContent = repo.stargazers_count;
