@@ -2,6 +2,10 @@
 
 An animated day/night switch in a single HTML file. No libraries, no build step.
 
+**[Live demo →](https://interactive-day-night-toggle.vercel.app)**
+
+![Day / night toggle animation](assets/demo.gif)
+
 ![Day](assets/day.png)
 ![Night](assets/night.png)
 
