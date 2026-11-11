@@ -12,6 +12,7 @@ Project summary lives in: `~/Desktop/AI/ai-os/10_context/projects/interactive-da
 - How to run it: Open `index.html` in a browser.
 - How to deploy it: push to `main` on GitHub (HamzehGhoreyshi/interactive-day-night-toggle) — Vercel auto-deploys to https://interactive-day-night-toggle.vercel.app
 - Rules specific to this project:
+  - Portfolio link: the published page must show a visible link to `https://hamzeh.framer.ai/?utm_source=interactive-day-night-toggle&utm_medium=referral`. Check it is there before every deploy.
   - No libraries, no build step. Keep CSS in style.css and JS in script.js (split on 2026-11-09 so GitHub shows real languages).
   - Motion uses CSS `linear()` spring curves (tokens `--spring-soft`, `--spring-bouncy` in `:root`).
   - Respect `prefers-reduced-motion`.
